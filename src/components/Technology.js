@@ -23,7 +23,7 @@ class Technology extends Component {
         this.setState({
           tech
         })
-        console.log(Res.data.articles);
+        // console.log(Res.data.articles);
       })
   }
 
@@ -34,10 +34,10 @@ class Technology extends Component {
        <div className="container">
         <CardColumns>
         {
-          tech.length > 0 ? tech.map(articles => {
+          tech.length > 0 ? tech.map((articles, index) => {
             const { title, url, urlToImage } = articles
             return (
-                <Card key="index" className="card">
+                <Card key={index} className="card">
                   <Card.Img variant="top" src={urlToImage} />
                   <Card.Body>
                   <Card.Title className="cardtitle">

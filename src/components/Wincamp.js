@@ -3,44 +3,42 @@ import '../../src/News.css'
 import axios from 'axios'
 import { Card, CardColumns } from 'react-bootstrap'
 
-class Home extends Component {
-
+class Wincamp extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      news: []
+      items: []
     }
   }
 
   componentDidMount() {
-    const BaseUrl = 'https://newsapi.org/'
-    const Country = 'id'
-    const Category = ''
-    const api_key = 'c31e43dfbba24714bc1ea406af143343'
-    axios.get(`${BaseUrl}/v2/top-headlines?country=${Country}&category=${Category}&apiKey=${api_key}`)
+    axios.get('https://wincamp.org/wp-json/wp/v2/posts')
       .then(Res => {
-        const news = Res.data.articles
+        const items = Res.data
         this.setState({
-          news
+          items
         })
+        // console.log(Res.data);
       })
+
   }
+
   render() {
-    const { news } = this.state
-    document.title = 'News'
+    const { items } = this.state
+    document.title = 'Wincamp'
     return (
       <div className="container">
         <CardColumns>
         {
-          news.length > 0 ? news.map((articles, index) => {
-            const { title, url, urlToImage } = articles
+          items.length > 0 ?  items.map((articles, index) => {
+            const {title, link, featured_media } = articles
             return (
                 <Card key={index} className="card">
-                  <Card.Img variant="top" src={urlToImage} />
+                <Card.Img variant="top" src={featured_media}/>
                   <Card.Body>
                   <Card.Title className="cardtitle">
-                    <a href={url} className="href" target="blank_">
-                      {title}
+                    <a href={link} className="href" target="blank_">
+                      {title.rendered}
                     </a>
                   </Card.Title>
                   </Card.Body>
@@ -54,4 +52,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Wincamp;
