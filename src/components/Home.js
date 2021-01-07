@@ -40,7 +40,7 @@ class Home extends Component {
                   <Card.Body>
                   <Card.Title className="cardtitle">
                     <a href={url} className="href" target="blank_">
-                      {title}
+                      {title} <br />
                     </a>
                   </Card.Title>
                   </Card.Body>

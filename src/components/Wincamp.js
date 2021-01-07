@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../src/News.css'
+import '../../src/Wincamp.css'
 import axios from 'axios'
 import { Card, CardColumns } from 'react-bootstrap'
 
@@ -7,8 +7,18 @@ class Wincamp extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      items: []
+      items: [],
+      visible: 2,
+      error: false
     }
+
+    this.loadMore = this.loadMore.bind(this);
+  }
+
+  loadMore() {
+    this.setState((prev) => {
+      return {visible: prev.visible + 2};
+    });
   }
 
   componentDidMount() {
@@ -18,36 +28,28 @@ class Wincamp extends Component {
         this.setState({
           items
         })
-        // console.log(Res.data);
+        console.log(Res.data);
       })
 
   }
 
   render() {
-    const { items } = this.state
-    document.title = 'Wincamp'
     return (
-      <div className="container">
-        <CardColumns>
-        {
-          items.length > 0 ?  items.map((articles, index) => {
-            const {title, link, featured_media } = articles
+      <section className="feed" id="feed">
+        <div className="tiles" aria-live="polite">
+          {this.state.items.slice(0, this.state.visible).map((item, index) => {
             return (
-                <Card key={index} className="card">
-                <Card.Img variant="top" src={featured_media}/>
-                  <Card.Body>
-                  <Card.Title className="cardtitle">
-                    <a href={link} className="href" target="blank_">
-                      {title.rendered}
-                    </a>
-                  </Card.Title>
-                  </Card.Body>
-                </Card>
+              <div className="tile fade-in" key={item.id}>
+                <span className="count">{index + 1}</span>
+                <a href={item.link} className="href" target="blank_"><h2>{item.title.rendered}</h2></a>
+              </div>
             );
-          }) : null
+          })}
+        </div>
+        {this.state.visible < this.state.items.length &&
+          <button onClick={this.loadMore} type="button" className="load-more">Load more</button>
         }
-        </CardColumns>
-      </div>
+      </section>
     );
   }
 }
