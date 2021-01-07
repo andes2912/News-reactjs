@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import '../../src/Wincamp.css'
 import axios from 'axios'
-import { Card, CardColumns } from 'react-bootstrap'
 
 class Wincamp extends Component {
   constructor(props) {
     super(props)
     this.state = {
       items: [],
-      visible: 2,
+      visible: 10,
+      pages: 1,
       error: false
     }
 
@@ -17,12 +17,18 @@ class Wincamp extends Component {
 
   loadMore() {
     this.setState((prev) => {
-      return {visible: prev.visible + 2};
+      return {visible: prev.visible + 1};
     });
   }
 
+  IncrementItem = () => {
+    this.setState({ pages: this.state.pages + 1 });
+  }
+
   componentDidMount() {
-    axios.get('https://wincamp.org/wp-json/wp/v2/posts')
+    const page = this.state.pages
+
+    axios.get(`https://wincamp.org/wp-json/wp/v2/posts?page=${page}` )
       .then(Res => {
         const items = Res.data
         this.setState({
@@ -34,6 +40,7 @@ class Wincamp extends Component {
   }
 
   render() {
+    document.title = 'Wincamp'
     return (
       <section className="feed" id="feed">
         <div className="tiles" aria-live="polite">
@@ -46,9 +53,11 @@ class Wincamp extends Component {
             );
           })}
         </div>
-        {this.state.visible < this.state.items.length &&
-          <button onClick={this.loadMore} type="button" className="load-more">Load more</button>
+        {
+          this.state.visible < this.state.items.length &&
+          <button onClick={this.IncrementItem} type="button" className="load-more">Load more</button>
         }
+
       </section>
     );
   }

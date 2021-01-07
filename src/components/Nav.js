@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Link , NavLink} from 'react-router-dom'
 
 import logo from '../../src/logo.svg'
 
@@ -26,20 +26,20 @@ function Nav() {
             </Link>
           </Navbar.Brand>
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            {/* <li className="nav-item">
+              <NavLink className="nav-link" to="/">News</NavLink>
+            </li> */}
+
             <li className="nav-item">
-              <Link className="nav-link" to="/">News</Link>
+              <NavLink className="nav-link" to="/technology">Technology</NavLink>
             </li>
 
             <li className="nav-item">
-              <Link className="nav-link" to="/technology">Technology</Link>
+              <NavLink className="nav-link" to="/wincamp">Wincamp</NavLink>
             </li>
 
             <li className="nav-item">
-              <Link className="nav-link" to="/wincamp">Wincamp</Link>
-            </li>
-
-            <li className="nav-item">
-              <Link className="nav-link" to="/about">About</Link>
+              <NavLink className="nav-link" to="/about">About</NavLink>
             </li>
           </ul>
         </Navbar>
