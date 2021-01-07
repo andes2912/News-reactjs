@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import '../../src/News.css'
+import '../../src/Wincamp.css'
 import axios from 'axios'
-import { Card, CardColumns } from 'react-bootstrap'
 
 class Home extends Component {
 
@@ -13,43 +12,34 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    const BaseUrl = 'https://newsapi.org/'
-    const Country = 'id'
-    const Category = ''
-    const api_key = 'c31e43dfbba24714bc1ea406af143343'
-    axios.get(`${BaseUrl}/v2/top-headlines?country=${Country}&category=${Category}&apiKey=${api_key}`)
+    axios.get(`/nasional`)
       .then(Res => {
-        const news = Res.data.articles
+        const news = Res.data.data
         this.setState({
           news
         })
       })
   }
   render() {
-    const { news } = this.state
     document.title = 'News'
     return (
-      <div className="container">
-        <CardColumns>
-        {
-          news.length > 0 ? news.map((articles, index) => {
-            const { title, url, urlToImage } = articles
+      <section className="feed" id="feed">
+        <div className="tiles" aria-live="polite">
+          {this.state.news.slice(0, this.state.visible).map((item, index) => {
             return (
-                <Card key={index} className="card">
-                  <Card.Img variant="top" src={urlToImage} />
-                  <Card.Body>
-                  <Card.Title className="cardtitle">
-                    <a href={url} className="href" target="blank_">
-                      {title} <br />
-                    </a>
-                  </Card.Title>
-                  </Card.Body>
-                </Card>
+              <div className="tile fade-in" key={index}>
+                <span className="count">{index + 1}</span>
+                <a href={item.link} className="href" target="blank_"><h2>{item.judul}</h2></a>
+              </div>
             );
-          }) : null
+          })}
+        </div>
+        {
+          this.state.visible < this.state.news.length &&
+          <button onClick={this.IncrementItem} type="button" className="load-more">Load more</button>
         }
-        </CardColumns>
-      </div>
+
+      </section>
     );
   }
 }

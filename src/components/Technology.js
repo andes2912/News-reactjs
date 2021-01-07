@@ -13,46 +13,36 @@ class Technology extends Component {
   }
 
   componentDidMount() {
-    const BaseUrl = 'https://newsapi.org/'
-    const Country = 'id'
-    const Category = 'Technology'
-    const api_key = 'c31e43dfbba24714bc1ea406af143343'
-    axios.get(`${BaseUrl}/v2/top-headlines?country=${Country}&category=${Category}&apiKey=${api_key}`)
+
+    axios.get(`/teknologi`)
       .then(Res => {
-        const tech = Res.data.articles
+        const tech = Res.data.data
         this.setState({
           tech
         })
-        // console.log(Res.data.articles);
       })
   }
 
   render() {
-    const { tech } = this.state
     document.title = 'Technology'
     return (
-       <div className="container">
-        <CardColumns>
-        {
-          tech.length > 0 ? tech.map((articles, index) => {
-            const { title, url, urlToImage } = articles
+      <section className="feed" id="feed">
+        <div className="tiles" aria-live="polite">
+          {this.state.tech.slice(0, this.state.visible).map((item, index) => {
             return (
-                <Card key={index} className="card">
-                  <Card.Img variant="top" src={urlToImage} />
-                  <Card.Body>
-                  <Card.Title className="cardtitle">
-                    <a href={url} className="href" target="blank_">
-                      {title}
-                    </a>
-                  </Card.Title>
-                  </Card.Body>
-                </Card>
+              <div className="tile fade-in" key={index}>
+                <span className="count">{index + 1}</span>
+                <a href={item.link} className="href" target="blank_"><h2>{item.judul}</h2></a>
+              </div>
             );
-          }) : null
+          })}
+        </div>
+        {
+          this.state.visible < this.state.tech.length &&
+          <button onClick={this.IncrementItem} type="button" className="load-more">Load more</button>
         }
-        </CardColumns>
 
-      </div>
+      </section>
     );
   }
 }
