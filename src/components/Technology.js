@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../../src/News.css'
 import axios from 'axios'
-import { Card, CardColumns } from 'react-bootstrap'
 
 class Technology extends Component {
 

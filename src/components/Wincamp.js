@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../src/Wincamp.css'
+import '../../src/News.css'
 import axios from 'axios'
 
 class Wincamp extends Component {
