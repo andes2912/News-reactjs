@@ -38,7 +38,6 @@ class Wincamp extends Component {
       })
 
   }
-
   render() {
     document.title = 'Wincamp'
     return (
