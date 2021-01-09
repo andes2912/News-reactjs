@@ -12,13 +12,31 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    axios.get(`/nasional`)
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    const url = "https://www.news.developeridn.com"
+
+    axios.get(proxyurl + url)
       .then(Res => {
         const news = Res.data.data
         this.setState({
           news
         })
       })
+      .catch(Error => {
+        console.log(Error);
+      })
+
+
+    // axios.get(`${proxyurl} https://www.news.developeridn.com`, {
+    //   mode: 'no-cors'
+    // })
+    //   .then(Res => {
+    //     const news = Res.data.data
+    //     console.log(Res);
+    //     this.setState({
+    //       news
+    //     })
+    //   })
   }
   render() {
     document.title = 'News'
