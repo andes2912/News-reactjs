@@ -96,3 +96,9 @@ h2 {
 .load-more:focus {
   outline: 1px solid rgba(255, 255, 255, 0.5);
 }
+
+.center-about {
+  margin: 20%;
+  text-align: center;
+  color: #222;
+}

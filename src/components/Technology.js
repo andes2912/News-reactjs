@@ -13,7 +13,10 @@ class Technology extends Component {
 
   componentDidMount() {
 
-    axios.get(`/teknologi`)
+    const proxyurl = "https://cors-anywhere.herokuapp.com/"
+    const url = "https://www.news.developeridn.com/teknologi"
+
+    axios.get(proxyurl + url)
       .then(Res => {
         const tech = Res.data.data
         this.setState({

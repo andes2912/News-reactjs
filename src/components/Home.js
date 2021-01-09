@@ -25,18 +25,6 @@ class Home extends Component {
       .catch(Error => {
         console.log(Error);
       })
-
-
-    // axios.get(`${proxyurl} https://www.news.developeridn.com`, {
-    //   mode: 'no-cors'
-    // })
-    //   .then(Res => {
-    //     const news = Res.data.data
-    //     console.log(Res);
-    //     this.setState({
-    //       news
-    //     })
-    //   })
   }
   render() {
     document.title = 'News'
