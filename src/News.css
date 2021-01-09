@@ -79,24 +79,6 @@ h2 {
   font-family: "Nanum Gothic", "Verdana", sans-serif;
   font-size: 0.9em;
 }
-
-.load-more {
-  display: block;
-  border: 0;
-  margin: 1em auto;
-  padding: 0.75em 1em;
-  font-size: 1em;
-  background-color: #c34d41;
-  color: #fff;
-  font-weight: 500;
-  text-transform: uppercase;
-  font-family: "Nanum Gothic", "Verdana", sans-serif;
-  cursor: pointer;
-}
-.load-more:focus {
-  outline: 1px solid rgba(255, 255, 255, 0.5);
-}
-
 .center-about {
   margin: 20%;
   text-align: center;

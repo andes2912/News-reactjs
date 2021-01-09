@@ -31,7 +31,7 @@ class Home extends Component {
     return (
       <section className="feed" id="feed">
         <div className="tiles" aria-live="polite">
-          {this.state.news.slice(0, this.state.visible).map((item, index) => {
+          {this.state.news.map((item, index) => {
             return (
               <div className="tile fade-in" key={index}>
                 <span className="count">{index + 1}</span>
@@ -40,11 +40,6 @@ class Home extends Component {
             );
           })}
         </div>
-        {
-          this.state.visible < this.state.news.length &&
-          <button onClick={this.IncrementItem} type="button" className="load-more">Load more</button>
-        }
-
       </section>
     );
   }

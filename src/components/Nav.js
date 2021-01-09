@@ -7,6 +7,7 @@ import { Navbar } from 'react-bootstrap'
 import Home from '../components/Home'
 import About from '../components/About'
 import Technology from '../components/Technology';
+import Ekonomi from './Ekonomi';
 
 function Nav() {
   return (
@@ -30,6 +31,9 @@ function Nav() {
               <NavLink className="nav-link" to="/technology">Technology</NavLink>
             </li>
 
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/economy">Economy</NavLink>
+            </li>
 
             <li className="nav-item">
               <NavLink className="nav-link" to="/about">About</NavLink>
@@ -44,6 +48,10 @@ function Nav() {
 
           <Route path="/technology">
             <Technology/>
+          </Route>
+
+          <Route path="/economy">
+            <Ekonomi />
           </Route>
 
           <Route path="/about">
